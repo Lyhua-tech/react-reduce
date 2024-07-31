@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/Buttons'
 
-const App = () => {
+const ButtonPage = () => {
     const handleClick = () => {
         console.log('abc')
     }
@@ -26,4 +26,4 @@ const App = () => {
     )
 }
 
-export default App
+export default ButtonPage

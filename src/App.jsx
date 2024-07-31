@@ -1,26 +1,28 @@
-import {React, useState} from 'react';
-import DropDown from './components/DropDown';
-// import DarkMode from './components/DarkMode';
+import {React} from 'react';
+import Sidebar from './components/Sidebar';
+import Route from './components/Route';
+import AccordionPage from './pages/AccordionPage';
+import DropDownPage from './pages/DropDownPage';
+import ButtonPage from './pages/ButtonPage';
 
 const App = () => {
-    const [select, setSelect] = useState(null);
-    // const [darkMode, setDarkMode] = useState(0);
-
-    const handleSelect = (option) => {
-        setSelect(option);
-    }
-    // const handleChange = (color) => {
-    //     setDarkMode(color)
-    // }
-    const colors = [
-        {label: 'Red', value: 'red'},
-        {label: 'Green', value: 'Green'},
-        {label: 'Blue', value: 'blue'},
-    ]
-    return <div>
-        <DropDown options={colors} onSelect={handleSelect} select={select} />
-        {/* <DarkMode /> */}
-    </div>
+    
+    return (
+        <div className='container grid grid-cols-6 gap-6 mx-auto mt-4'>
+            <Sidebar />
+            <div className='col-span-5'>
+                <Route path='/Accordion'>
+                    <AccordionPage />
+                </Route>
+                <Route path='/'>
+                    <DropDownPage />
+                </Route>
+                <Route path='/Buttons'>
+                    <ButtonPage />
+                </Route>
+            </div>
+        </div>
+    )
 }
 
 export default App

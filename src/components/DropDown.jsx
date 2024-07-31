@@ -1,10 +1,10 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect, useRef} from 'react';
 import { GoChevronDown } from "react-icons/go";
 import Panel from './Panel';
 
 const DropDown = ({ options, onSelect, select}) => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const divRef = useRef();
     const handleOpen = () => {
         setIsOpen((currentOpen) => !currentOpen);
     }
@@ -13,6 +13,21 @@ const DropDown = ({ options, onSelect, select}) => {
         setIsOpen(!isOpen);
         onSelect(option);
     }
+
+    useEffect(() => {
+        const handler = (event) => {
+            if (!divRef.current) {
+                return;
+            }
+            if (!divRef.current.contains(event.target)){
+                setIsOpen(false);
+            }
+        }
+        document.addEventListener('click', handler, true);
+        return () => {
+            document.removeEventListener('click', handler);
+        }
+    }, [])
 
     const renderOptions = options.map((option) => {
         return (
@@ -34,7 +49,7 @@ const DropDown = ({ options, onSelect, select}) => {
     let result = select?.label || 'Select...'
 
     return (
-        <div className='w-48 relative'>
+        <div ref={divRef} className='w-48 relative'>
             <Panel className="flex justify-between items-center cursor-pointer" onClick={handleOpen}>
                 {result}
                 <GoChevronDown className='text-xl'/>
