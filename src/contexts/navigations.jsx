@@ -5,6 +5,7 @@ const NavigationContext = createContext();
 const NavigationProvider = ( { children }) => {
     const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
+    // this will add the pathname of each page until
     useEffect(() => {
         const handler = () => {
             setCurrentPath(window.location.pathname);
